@@ -20,9 +20,7 @@ function BasketItem(props) {
             x{quantity}{' '}
             <i
                 className='material-icons basket-quantity'
-                onClick={() => incQuantity(id)}
-            >
-                add
+                onClick={() => incQuantity(id)}>add
             </i>{' '}
             = {price * quantity} руб.
             <span
