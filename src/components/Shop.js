@@ -6,7 +6,7 @@ import { GoodsList } from "./GoodsList";
 import { Preloader } from "./Prelouder";
 import axios from "axios";
 import { Cart } from "./Cart";
-
+import { BasketList } from './BasketList';
 
 export default function Shop() {
 	const [goods, setGoods] = useState([]);
@@ -83,6 +83,16 @@ export default function Shop() {
 			{/* в зависимости идет загрузка или нет показываем  Preloader или список товаров*/}
             <Cart quantity={order.length} handleBasketShow={handleBasketShow}/>
 			{loading ? <Preloader /> : <GoodsList addToBasket={addToBasket} goods={goods} /> }
+            {/* если true то передай эти пропсы */}
+            {isBasketShow && (
+                <BasketList
+                    order={order}
+                    handleBasketShow={handleBasketShow}
+                    // removeFromBasket={removeFromBasket}
+                    // incQuantity={incQuantity}
+                    // decQuantity={decQuantity}
+                />
+            )}
 		</main>
 	);
 }
