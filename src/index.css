@@ -57,6 +57,7 @@ nav {
 }
 
 .basket-list {
+  cursor: pointer;
   position: fixed;
   top: 50%;
   left: 50%;

@@ -7,6 +7,7 @@ import { Preloader } from "./Prelouder";
 import axios from "axios";
 import { Cart } from "./Cart";
 import { BasketList } from './BasketList';
+import { Alert } from "./Alert";
 
 export default function Shop() {
 	const [goods, setGoods] = useState([]);
@@ -85,6 +86,39 @@ export default function Shop() {
         const newOrder = order.filter((el) => el.id !== itemId);
         setOrder(newOrder);
     };
+
+    const incQuantity = (itemId) => {
+        const newOrder = order.map((el) => {
+            // elem id === itemId
+            if (el.id === itemId) {
+                // новое newQuantity которое ровно - el.quantity + 1;
+                const newQuantity = el.quantity + 1;
+                return {
+                    // вернуть все ключи этого элемента и обновить  quantity: newQuantity,
+                    ...el,
+                    quantity: newQuantity,
+                };
+            } else {
+                return el;
+            }
+        });
+        setOrder(newOrder);
+    };
+
+    const decQuantity = (itemId) => {
+        const newOrder = order.map((el) => {
+            if (el.id === itemId) {
+                const newQuantity = el.quantity - 1;
+                return {
+                    ...el,
+                    quantity: newQuantity >= 0 ? newQuantity : 0,
+                };
+            } else {
+                return el;
+            }
+        });
+        setOrder(newOrder);
+    };
 	
 	return (
 		<main className="container content">
@@ -97,8 +131,8 @@ export default function Shop() {
                     order={order}
                     handleBasketShow={handleBasketShow}
                     removeFromBasket={removeFromBasket}
-                    // incQuantity={incQuantity}
-                    // decQuantity={decQuantity}
+                    incQuantity={incQuantity}
+                    decQuantity={decQuantity}
                 />
             )}
 		</main>
