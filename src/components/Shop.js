@@ -119,6 +119,11 @@ export default function Shop() {
         });
         setOrder(newOrder);
     };
+
+    // f on click shows which good costumer clicked on
+    const closeAlert = () => {
+        setAlertName('');
+    };
 	
 	return (
 		<main className="container content">
@@ -135,6 +140,7 @@ export default function Shop() {
                     decQuantity={decQuantity}
                 />
             )}
+             {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
 		</main>
 	);
 }
